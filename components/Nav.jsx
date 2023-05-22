@@ -40,7 +40,7 @@ const Nav = () => {
               Create Post
             </Link>
             <button type="button" onClick={() => signOut({
-              callbackUrl: `${window.location.origin}`
+              callbackUrl: '/'
             })} className="outline_btn">Sign Out</button>
             <Link href="/profile">
               <Image
@@ -106,7 +106,7 @@ const Nav = () => {
                     onClick={() => {
                       setToggleDropdown(false)
                       signOut({
-                        callbackUrl: `${window.location.origin}`
+                        callbackUrl: '/',
                       })
                     }}
                   >

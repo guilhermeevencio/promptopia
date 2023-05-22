@@ -19,10 +19,21 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
     setTimeout(() => setCopied(''), 3000)
   }
 
+  const handleRedirect = () => {
+    if (post.creator._id === session.user?.id) {
+      return router.push('/profile')
+    }
+    router.push(`/profile/${session.user?.id}?name=${post.creator.username}`)
+  }
+
   return (
     <div className="prompt_card">
       <div className="flex justify-between items-start gap-5">
-        <div className="flex-1 flex justify-start items-center gap-3 cursor-pointer">
+        <button
+        type="button"
+        className="flex-1 flex justify-start items-center gap-3 cursor-pointer"
+        onClick={handleRedirect}
+        >
           <Image
             src={post.creator.image}
             alt="user_image"
@@ -30,7 +41,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             height={40}
             className="rounded-full object-contain"
           />
-          <div className="flex flex-col">
+          <div className="flex flex-col justify-start items-start">
             <h3 className="font-satoshi font-semibold text-gray-900">
               {post.creator.username}
             </h3>
@@ -38,7 +49,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
               {post.creator.email}
             </p>
           </div>
-        </div>
+        </button>
         <div className="copy_btn" onClick={handleCopy}>
           <Image
             src={copied === post.prompt
@@ -47,6 +58,7 @@ const PromptCard = ({ post, handleTagClick, handleEdit, handleDelete }) => {
             }
             width={12}
             height={12}
+            alt="copy icon"
           />
         </div>
       </div>
